@@ -27,7 +27,7 @@ public class NetworkUtils {
 
     public static URL buildUrl() {
         Uri uri = Uri.parse(BASE_URL).buildUpon()
-                .appendQueryParameter(SOURCE_PARAM_NAME, SORT_PARAM_VALUE)
+                .appendQueryParameter(SOURCE_PARAM_NAME, SOURCE_PARAM_VALUE)
                 .appendQueryParameter(SORT_PARAM_NAME, SORT_PARAM_VALUE)
                 .appendQueryParameter(API_KEY_PARAM_NAME, API_KEY)
                 .build();
