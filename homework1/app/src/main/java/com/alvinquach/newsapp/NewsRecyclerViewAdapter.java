@@ -1,4 +1,4 @@
-package com.example.rkjc.news_app_2;
+package com.alvinquach.newsapp;
 
 import android.content.Context;
 import android.content.Intent;

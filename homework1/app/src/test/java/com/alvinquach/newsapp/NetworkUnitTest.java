@@ -1,6 +1,8 @@
 package com.alvinquach.newsapp;
 
 
+import com.alvinquach.newsapp.util.NetworkUtils;
+
 import org.junit.Test;
 
 import java.net.URL;

@@ -23,7 +23,7 @@ public class NetworkUtils {
 
     private final static String API_KEY_PARAM_NAME = "apiKey";
 
-    private final static String API_KEY = "";
+    private final static String API_KEY = "d0ec7c04b5e54bcd96337ba5a64d126d";
 
     public static URL buildUrl() {
         Uri uri = Uri.parse(BASE_URL).buildUpon()
