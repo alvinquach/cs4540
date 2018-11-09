@@ -1,14 +1,15 @@
 package com.alvinquach.newsapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alvinquach.newsapp.R;
+import com.alvinquach.newsapp.WebActivity;
 import com.alvinquach.newsapp.model.NewsItem;
 
 import java.text.DateFormat;
@@ -77,8 +78,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
 
         @Override
         public void onClick(View view) {
-            int index = getAdapterPosition();
-            Log.d("CLICKED", mNewsItems.get(index).getTitle());
+            NewsItem newsItem = mNewsItems.get(getAdapterPosition());
+            String url = newsItem.getUrl();
+            Intent intent = new Intent(mContext, WebActivity.class);
+            intent.putExtra("urlString", url);
+            mContext.startActivity(intent);
         }
     }
 }
