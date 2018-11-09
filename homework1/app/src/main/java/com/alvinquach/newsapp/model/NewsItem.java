@@ -1,4 +1,4 @@
-package com.alvinquach.newsapp;
+package com.alvinquach.newsapp.model;
 
 import java.util.Date;
 

@@ -1,5 +1,6 @@
 package com.alvinquach.newsapp;
 
+import com.alvinquach.newsapp.model.NewsItem;
 import com.alvinquach.newsapp.util.JsonUtils;
 
 import org.junit.Test;
