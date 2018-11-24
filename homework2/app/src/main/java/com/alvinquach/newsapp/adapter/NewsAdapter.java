@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alvinquach.newsapp.R;
-import com.alvinquach.newsapp.model.NewsItem;
+import com.alvinquach.newsapp.data.entity.NewsItem;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

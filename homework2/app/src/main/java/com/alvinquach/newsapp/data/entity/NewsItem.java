@@ -1,8 +1,20 @@
-package com.alvinquach.newsapp.model;
+package com.alvinquach.newsapp.data.entity;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
+@Entity(tableName = "news_item")
 public class NewsItem {
+
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @JsonIgnore
+    private int id;
 
     private String author;
     private String title;
@@ -10,6 +22,15 @@ public class NewsItem {
     private String url;
     private String urlToImage;
     private Date publishedAt;
+
+    @NonNull
+    public int getId() {
+        return id;
+    }
+
+    public void setId(@NonNull int id) {
+        this.id = id;
+    }
 
     public String getAuthor() {
         return author;

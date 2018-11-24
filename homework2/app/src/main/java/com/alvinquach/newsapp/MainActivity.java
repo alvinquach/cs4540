@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alvinquach.newsapp.adapter.NewsAdapter;
-import com.alvinquach.newsapp.model.NewsItem;
+import com.alvinquach.newsapp.data.entity.NewsItem;
 import com.alvinquach.newsapp.util.JsonUtils;
 import com.alvinquach.newsapp.util.NetworkUtils;
 

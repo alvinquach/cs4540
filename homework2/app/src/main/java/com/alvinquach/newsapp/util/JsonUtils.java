@@ -1,6 +1,6 @@
 package com.alvinquach.newsapp.util;
 
-import com.alvinquach.newsapp.model.NewsItem;
+import com.alvinquach.newsapp.data.entity.NewsItem;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
