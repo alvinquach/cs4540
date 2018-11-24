@@ -3,12 +3,15 @@ package com.alvinquach.newsapp.data.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import com.alvinquach.newsapp.data.converter.DateConverter;
 import com.alvinquach.newsapp.data.dao.NewsItemDao;
 import com.alvinquach.newsapp.data.entity.NewsItem;
 
 @Database(entities = {NewsItem.class}, version = 1)
+@TypeConverters(DateConverter.class)
 public abstract class NewsRoomDatabase extends RoomDatabase {
 
     public abstract NewsItemDao newsItemDao();

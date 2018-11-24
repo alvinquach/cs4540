@@ -33,7 +33,7 @@ public class NewsItemRepository {
         new SyncNewsItemsTask(mNewsItemDao).execute();
     }
 
-    private static class SyncNewsItemsTask extends AsyncTask<Void, Void, String> {
+    private static class SyncNewsItemsTask extends AsyncTask<Void, Void, Void> {
 
         private NewsItemDao mAsyncTaskDao;
 
@@ -42,31 +42,29 @@ public class NewsItemRepository {
         }
 
         @Override
-        protected String doInBackground(Void ...objects) {
+        protected Void doInBackground(Void ...objects) {
 
             // Clear all current entries in the database.
             mAsyncTaskDao.clearAll();
 
+            String responseBody;
             try {
+
                 // Call the API and get a result string.
-                return NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl());
+                responseBody =  NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl());
             }
             catch (IOException e) {
                 e.printStackTrace();
                 return null;
             }
 
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
             // Parse results into a list of news objects.
-            ArrayList<NewsItem> newsItems = JsonUtils.parseNews(result);
+            ArrayList<NewsItem> newsItems = JsonUtils.parseNews(responseBody);
 
             // Persist news into database
             mAsyncTaskDao.insert(newsItems);
+
+            return null;
         }
 
     }
