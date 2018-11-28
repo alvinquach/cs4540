@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alvinquach.newsapp.adapter.NewsAdapter;
 import com.alvinquach.newsapp.data.viewmodel.NewsItemViewModel;
+import com.alvinquach.newsapp.job.FirebaseJobScheduler;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
             mAdapter.updateNewsItems(items);
             mAdapter.notifyDataSetChanged();
         });
+        Log.d("HELLO", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+        FirebaseJobScheduler.getInstance().scheduleRefresh(this);
     }
 
     @Override
