@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">News App</string>
     <string name="refresh">Refresh</string>
+
+    <string name="charging_reminder_notification_title">News App - News items refreshed</string>
+    <string name="charging_reminder_notification_body">The latest news articles have been fetched and are ready to be viewed.</string>
+    <string name="main_notification_channel_name">Primary</string>
 </resources>

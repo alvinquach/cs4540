@@ -17,7 +17,7 @@ public class NewsItemViewModel extends AndroidViewModel {
 
     public NewsItemViewModel(Application application) {
         super(application);
-        mRepository = new NewsItemRepository(application);
+        mRepository = new NewsItemRepository(application.getApplicationContext());
         mNewsItems = mRepository.loadAllNewsItems();
     }
 

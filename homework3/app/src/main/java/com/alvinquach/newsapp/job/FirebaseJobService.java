@@ -1,20 +1,18 @@
 package com.alvinquach.newsapp.job;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alvinquach.newsapp.data.repository.NewsItemRepository;
-import com.alvinquach.newsapp.data.viewmodel.NewsItemViewModel;
+import com.alvinquach.newsapp.notification.NotificationUtils;
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 
 public class FirebaseJobService extends JobService {
 
-    private NewsItemRepository mRepository;
+    private NewsItemRepository mRepository = new NewsItemRepository(this);
 
-    private AsyncTask mBackgroundTask;
+    private AsyncTask<Void, Void, Void> mBackgroundTask;
 
     public FirebaseJobService() {
         Log.d("HELLO", "JOB CREATED");
@@ -28,21 +26,16 @@ public class FirebaseJobService extends JobService {
         mBackgroundTask = new AsyncTask<Void, Void, Void>() {
 
             @Override
-            protected void onPreExecute() {
-                Toast.makeText(FirebaseJobService.this, "News refreshed", Toast.LENGTH_SHORT).show();
-                super.onPreExecute();
-            }
-
-            @Override
-            protected Void doInBackground(Void ...objects) {
-                //mRepository.syncNewsItems();
+            protected Void doInBackground(Void... objects) {
+                mRepository.syncNewsItems();
+                NotificationUtils.remindUserBecauseCharging(FirebaseJobService.this);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void o) {
                 jobFinished(jobParameters, false);
-                super.onPostExecute(o);
+                Log.d("HELLO", "JOB FINISHED");
             }
 
         };
@@ -54,11 +47,10 @@ public class FirebaseJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-
         if (mBackgroundTask != null) {
-            mBackgroundTask.cancel(false);
+            mBackgroundTask.cancel(true);
         }
-
         return true;
     }
+
 }

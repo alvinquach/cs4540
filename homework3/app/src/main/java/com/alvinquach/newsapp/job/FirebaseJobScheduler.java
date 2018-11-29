@@ -10,6 +10,7 @@ import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
 
 public class FirebaseJobScheduler {
@@ -22,16 +23,12 @@ public class FirebaseJobScheduler {
 
     private boolean initialized = false;
 
-    private FirebaseJobScheduler() {
-
-    }
-
     public static FirebaseJobScheduler getInstance() {
         return INSTANCE;
     }
 
     synchronized public void scheduleRefresh(Context context) {
-        Log.d("HELLO", "WTF YO!!!!!!!!");
+
         if (initialized) {
             return;
         }
@@ -42,11 +39,12 @@ public class FirebaseJobScheduler {
         Job constraintRefreshJob = dispatcher.newJobBuilder()
                 .setService(FirebaseJobService.class)
                 .setTag(NEWS_JOB_TAG)
-//                .setConstraints(Constraint.ON_ANY_NETWORK)
+                .setConstraints(Constraint.ON_ANY_NETWORK)
                 .setLifetime(Lifetime.FOREVER)
                 .setRecurring(true)
                 .setTrigger(Trigger.executionWindow(SCHEDULE_INTERVAL_SECONDS,
                         SCHEDULE_INTERVAL_SECONDS + SYNC_FLEXTIME_SECONDS))
+                .setRetryStrategy(RetryStrategy.DEFAULT_LINEAR)
                 .setReplaceCurrent(true)
                 .build();
 

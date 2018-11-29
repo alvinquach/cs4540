@@ -2,7 +2,9 @@ package com.alvinquach.newsapp.data.repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.alvinquach.newsapp.data.dao.NewsItemDao;
 import com.alvinquach.newsapp.data.database.NewsRoomDatabase;
@@ -19,8 +21,8 @@ public class NewsItemRepository {
     private NewsItemDao mNewsItemDao;
     private LiveData<List<NewsItem>> mNewsItems;
 
-    public NewsItemRepository(Application application) {
-        NewsRoomDatabase db = NewsRoomDatabase.getDatabase(application.getApplicationContext());
+    public NewsItemRepository(Context context) {
+        NewsRoomDatabase db = NewsRoomDatabase.getDatabase(context);
         mNewsItemDao = db.newsItemDao();
         mNewsItems = mNewsItemDao.loadAllNewsItems();
     }
@@ -52,6 +54,7 @@ public class NewsItemRepository {
 
                 // Call the API and get a result string.
                 responseBody =  NetworkUtils.getResponseFromHttpUrl(NetworkUtils.buildUrl());
+                Log.d("HELLO", responseBody);
             }
             catch (IOException e) {
                 e.printStackTrace();
