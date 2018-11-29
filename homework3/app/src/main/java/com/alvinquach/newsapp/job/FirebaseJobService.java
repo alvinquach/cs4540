@@ -28,7 +28,7 @@ public class FirebaseJobService extends JobService {
             @Override
             protected Void doInBackground(Void... objects) {
                 mRepository.syncNewsItems();
-                NotificationUtils.remindUserBecauseCharging(FirebaseJobService.this);
+                NotificationUtils.notifySynced(FirebaseJobService.this);
                 return null;
             }
 

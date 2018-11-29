@@ -39,7 +39,7 @@ public class FirebaseJobScheduler {
         Job constraintRefreshJob = dispatcher.newJobBuilder()
                 .setService(FirebaseJobService.class)
                 .setTag(NEWS_JOB_TAG)
-//                .setConstraints(Constraint.ON_ANY_NETWORK)
+                .setConstraints(Constraint.ON_ANY_NETWORK)
                 .setLifetime(Lifetime.FOREVER)
                 .setRecurring(true)
                 .setTrigger(Trigger.executionWindow(SCHEDULE_INTERVAL_SECONDS,

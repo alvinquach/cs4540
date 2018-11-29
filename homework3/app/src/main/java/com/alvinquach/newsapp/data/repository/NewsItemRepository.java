@@ -46,9 +46,6 @@ public class NewsItemRepository {
         @Override
         protected Void doInBackground(Void ...objects) {
 
-            // Clear all current entries in the database.
-            mAsyncTaskDao.clearAll();
-
             String responseBody;
             try {
 
@@ -64,8 +61,15 @@ public class NewsItemRepository {
             // Parse results into a list of news objects.
             ArrayList<NewsItem> newsItems = JsonUtils.parseNews(responseBody);
 
-            // Persist news into database
-            mAsyncTaskDao.insert(newsItems);
+            // Persist news into database if the response is not empty
+            if (newsItems != null && !newsItems.isEmpty()) {
+
+                // Clear all current entries in the database, first.
+                mAsyncTaskDao.clearAll();
+
+                // Insert the new items.
+                mAsyncTaskDao.insert(newsItems);
+            }
 
             return null;
         }
