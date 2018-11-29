@@ -1,5 +1,6 @@
 package com.alvinquach.newsapp.adapter;
 
+import android.arch.persistence.room.util.StringUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,10 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alvinquach.newsapp.R;
 import com.alvinquach.newsapp.data.entity.NewsItem;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,20 +62,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemViewHo
     public class NewsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView description;
-        private TextView date;
+        private ImageView image;
 
         public NewsItemViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
-            date = itemView.findViewById(R.id.date);
+            image = itemView.findViewById(R.id.image);
         }
 
         private void bind(int index) {
             NewsItem newsItem = mNewsItems.get(index);
-            title.setText("Title: " + newsItem.getTitle());
-            description.setText("Description: " + newsItem.getDescription());
-            date.setText("Date: " + DATE_FORMAT.format(newsItem.getPublishedAt()));
+            title.setText(newsItem.getTitle());
+            description.setText(DATE_FORMAT.format(newsItem.getPublishedAt()) + " - " + newsItem.getDescription());
+            String imageUrl = newsItem.getUrlToImage();
+            if (imageUrl != null) {
+                Picasso.get().load(imageUrl).into(image);
+            }
             itemView.setOnClickListener(this);
         }
 
